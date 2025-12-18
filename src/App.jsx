@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import InputComp from "./components/Input";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -14,22 +15,21 @@ function App() {
 
   return (
     <div>
-      <h1 className="title">
-        ACTIDAY <span className="sub-title">ACTIVITY TODAY</span>
-      </h1>
-      <p>{today}</p>
-      <form>
-        <div className="wp">
-          <input
-            type="text"
-            placeholder="What Your Activity..."
-            // value={taskName}
-            onChange={(e) => setTaskname(e.target.value)}
-          />
-          <button type="submit">+</button>
-          <button disabled={selectedIds.length === 0}>x</button>
-        </div>
-      </form>
+      <div className="header">
+        <h1 className="title">ACTIDAY</h1>
+        <p className="date">{today}</p>
+
+        <form>
+          <div className="wrapper-filter">
+            <InputComp
+              type="search"
+              name="search"
+              id="input"
+              placeholder="Search Activity..."
+            />
+          </div>
+        </form>
+      </div>
       <ul>
         {todos.map((item) => (
           <li key={item.id}>
