@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { MdDeleteForever } from "react-icons/md";
 import { supabase } from "./supabaseClient";
 import InputComp from "./components/Input";
+import Button from "./components/Button";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -27,21 +29,11 @@ function App() {
               id="input"
               placeholder="Search Activity..."
             />
+            <Button label={<MdDeleteForever size={30} color="white" />} />
           </div>
         </form>
       </div>
-      <ul>
-        {todos.map((item) => (
-          <li key={item.id}>
-            <span>{item.task}</span>
-            <input
-              type="checkbox"
-              checked={selectedIds.includes(item.id)}
-              onChange={() => handleSelect(item.id)}
-            />
-          </li>
-        ))}
-      </ul>
+      <ul></ul>
     </div>
   );
 }
