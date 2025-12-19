@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
+import { FaRegSquarePlus } from "react-icons/fa6";
 import { supabase } from "./supabaseClient";
 import InputComp from "./components/Input";
 import Button from "./components/Button";
@@ -17,7 +18,7 @@ function App() {
   });
 
   return (
-    <div>
+    <div className="container">
       <div className="header">
         <h1 className="title">ACTIDAY</h1>
         <p className="date">{today}</p>
@@ -35,7 +36,7 @@ function App() {
           </div>
         </form>
       </div>
-      <div className="container">
+      <div className="content">
         {todos.length > 0 ? (
           todos.map((item) => (
             <Card
@@ -52,6 +53,10 @@ function App() {
           </div>
         )}
       </div>
+      <Button
+        label={<FaRegSquarePlus size={40} color="white" />}
+        className="btn-add"
+      />
     </div>
   );
 }

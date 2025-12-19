@@ -23,6 +23,10 @@ body {
   color: white;
 }
 
+.container {
+  position: relative;
+}
+
 /* --------------------------component-------------------- */
 .wrapper-input input {
   background: white;
@@ -65,6 +69,15 @@ input::-ms-reveal {
   align-items: center;
   background: #ffac2f;
   cursor: pointer;
+}
+
+.btn-add {
+  border-radius: 9000px;
+  width: 70px;
+  height: 70px;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
 }
 
 .wrapper-card {
@@ -111,7 +124,7 @@ input::-ms-reveal {
 /* --------------------------header end-------------------- */
 
 /* --------------------------body-------------------- */
-.container {
+.content {
   margin-top: 40px;
 }
 
