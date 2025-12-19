@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegSquarePlus } from "react-icons/fa6";
-import { supabase } from "./supabaseClient";
+import { useTodos } from "./hooks/useTodos";
 import InputComp from "./components/Input";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import BottomSheet from "./components/BottomSheet";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const { todos, addTodo, deleteTodos } = useTodos();
   const [selectedIds, setSelectedIds] = useState([]);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -17,6 +17,19 @@ function App() {
     month: "long",
     year: "numeric",
   });
+
+  const handleSelect = (id) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    if (selectedIds.length === 0) return;
+    await deleteTodos(selectedIds);
+    setSelectedIds([]);
+  };
 
   return (
     <div className="container">
@@ -33,7 +46,10 @@ function App() {
               placeholder="Search Activity..."
               searchIcon
             />
-            <Button label={<MdDeleteForever size={30} color="white" />} />
+            <Button
+              label={<MdDeleteForever size={30} color="white" />}
+              onClick={handleDelete}
+            />
           </div>
         </form>
       </div>
@@ -62,6 +78,7 @@ function App() {
       <BottomSheet
         isOpen={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}
+        onSave={addTodo}
       ></BottomSheet>
     </div>
   );

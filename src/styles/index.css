@@ -107,6 +107,8 @@ input::-ms-reveal {
 /* --------------------------body-------------------- */
 .content {
   margin-top: 40px;
+  display: grid;
+  gap: 15px;
 }
 
 .empty-state {

@@ -3,17 +3,17 @@ import "../styles/bottomSheet.css";
 import InputComp from "./Input";
 import Button from "./Button";
 
-const BottomSheet = ({ isOpen, onClose }) => {
+const BottomSheet = ({ isOpen, onClose, onSave }) => {
   const [taskName, setTaskname] = useState("");
   const [error, setError] = useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (taskName.trim() === "") {
       setError("Task name cannot be empty!");
       return;
     }
 
-    console.log("Saving task:", taskName);
+    await onSave(taskName);
     setError("");
     setTaskname("");
     onClose();

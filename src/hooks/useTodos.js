@@ -24,10 +24,10 @@ export const useTodos = () => {
     return error;
   };
 
-  const deleteTodos = async () => {
-    const { data, error } = await supabase.from("todos").delete().in("id", ids);
+  const deleteTodos = async (ids) => {
+    const { error } = await supabase.from("todos").delete().in("id", ids);
     if (!error) {
-      setTodos((prev) => prev.filter((t) => !ids.includes(t.ids)));
+      setTodos((prev) => prev.filter((t) => !ids.includes(t.id)));
     }
     return { error };
   };
