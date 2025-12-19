@@ -9,9 +9,10 @@ const InputComp = ({
   checked,
   onChange,
   placeholder = "",
+  className = "",
 }) => {
   return (
-    <div className="wrapper-input">
+    <div className={`wrapper-input ${className}`}>
       {searchIcon && (
         <label htmlFor={id}>
           <FiSearch className="search-icon" />

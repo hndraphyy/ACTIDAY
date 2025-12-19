@@ -5,11 +5,13 @@ import { supabase } from "./supabaseClient";
 import InputComp from "./components/Input";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import BottomSheet from "./components/BottomSheet";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [taskName, setTaskname] = useState("");
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const today = new Date().toLocaleDateString("id-ID", {
     day: "numeric",
@@ -56,7 +58,12 @@ function App() {
       <Button
         label={<FaRegSquarePlus size={40} color="white" />}
         className="btn-add"
+        onClick={() => setIsSheetOpen(true)}
       />
+      <BottomSheet
+        isOpen={isSheetOpen}
+        onClose={() => setIsSheetOpen(false)}
+      ></BottomSheet>
     </div>
   );
 }
