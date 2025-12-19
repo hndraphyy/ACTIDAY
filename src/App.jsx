@@ -8,7 +8,8 @@ import Card from "./components/Card";
 import BottomSheet from "./components/BottomSheet";
 
 function App() {
-  const { todos, addTodo, deleteTodos } = useTodos();
+  const { todos, searchQuery, setSearchQuery, addTodo, deleteTodos } =
+    useTodos();
   const [selectedIds, setSelectedIds] = useState([]);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -45,6 +46,8 @@ function App() {
               id="input"
               placeholder="Search Activity..."
               searchIcon
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <Button
               label={<MdDeleteForever size={30} color="white" />}

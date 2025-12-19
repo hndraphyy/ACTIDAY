@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabase } from "../supabaseClient";
 
 export const useTodos = () => {
   const [todos, setTodos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
   const fetchTodos = async () => {
@@ -32,9 +33,22 @@ export const useTodos = () => {
     return { error };
   };
 
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) =>
+      todo.task.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [todos, searchQuery]);
+
   useEffect(() => {
     fetchTodos();
   }, []);
 
-  return { todos, loading, addTodo, deleteTodos };
+  return {
+    todos: filteredTodos,
+    searchQuery,
+    setSearchQuery,
+    loading,
+    addTodo,
+    deleteTodos,
+  };
 };
