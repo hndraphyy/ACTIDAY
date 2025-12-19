@@ -1,0 +1,36 @@
+.btn {
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffac2f;
+  cursor: pointer;
+  font-family: "Outfit", sans-serif;
+}
+
+.btn-add {
+  border-radius: 9000px;
+  width: 70px;
+  height: 70px;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.btn-bottom-sheet {
+  margin-top: 20px;
+  color: white;
+  padding: 11px 20px;
+  font-size: 1.1rem;
+  border: 1px solid rgb(21, 119, 231);
+}
+
+.btn-cancel {
+  background: transparent;
+  color: rgb(21, 119, 231);
+}
+
+.btn-save {
+  background: rgb(21, 119, 231);
+}

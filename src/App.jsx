@@ -10,7 +10,6 @@ import BottomSheet from "./components/BottomSheet";
 function App() {
   const [todos, setTodos] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [taskName, setTaskname] = useState("");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const today = new Date().toLocaleDateString("id-ID", {

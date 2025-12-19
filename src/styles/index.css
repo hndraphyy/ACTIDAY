@@ -61,25 +61,6 @@ input::-ms-reveal {
   height: 0;
 }
 
-.btn {
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffac2f;
-  cursor: pointer;
-}
-
-.btn-add {
-  border-radius: 9000px;
-  width: 70px;
-  height: 70px;
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-}
-
 .wrapper-card {
   background: white;
   color: black;
