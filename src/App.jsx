@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { useTodos } from "./hooks/useTodos";
@@ -6,9 +6,10 @@ import InputComp from "./components/Input";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import BottomSheet from "./components/BottomSheet";
+import SpinnerLoading from "./components/SpinnerLoading";
 
 function App() {
-  const { todos, searchQuery, setSearchQuery, addTodo, deleteTodos } =
+  const { todos, loading, searchQuery, setSearchQuery, addTodo, deleteTodos } =
     useTodos();
   const [selectedIds, setSelectedIds] = useState([]);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -38,7 +39,7 @@ function App() {
         <h1 className="title">ACTIDAY</h1>
         <p className="date">{today}</p>
 
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="wrapper-filter">
             <InputComp
               type="search"
@@ -50,14 +51,18 @@ function App() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <Button
+              type="button"
               label={<MdDeleteForever size={30} color="white" />}
               onClick={handleDelete}
             />
           </div>
         </form>
       </div>
+
       <div className="content">
-        {todos.length > 0 ? (
+        {loading ? (
+          <SpinnerLoading />
+        ) : todos.length > 0 ? (
           todos.map((item) => (
             <Card
               key={item.id}
@@ -69,20 +74,26 @@ function App() {
           ))
         ) : (
           <div className="empty-state">
-            <p>No activities yet. Start adding some!</p>
+            <p>
+              {searchQuery
+                ? "No matching activities."
+                : "No activities yet. Start adding some!"}
+            </p>
           </div>
         )}
       </div>
+
       <Button
         label={<FaRegSquarePlus size={40} color="white" />}
         className="btn-add"
         onClick={() => setIsSheetOpen(true)}
       />
+
       <BottomSheet
         isOpen={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}
         onSave={addTodo}
-      ></BottomSheet>
+      />
     </div>
   );
 }

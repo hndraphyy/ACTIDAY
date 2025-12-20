@@ -5,6 +5,15 @@ export const useTodos = () => {
   const [todos, setTodos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
 
   const fetchTodos = async () => {
     setLoading(true);
@@ -35,9 +44,9 @@ export const useTodos = () => {
 
   const filteredTodos = useMemo(() => {
     return todos.filter((todo) =>
-      todo.task.toLowerCase().includes(searchQuery.toLowerCase())
+      todo.task.toLowerCase().includes(debouncedSearch.toLowerCase())
     );
-  }, [todos, searchQuery]);
+  }, [todos, debouncedSearch]);
 
   useEffect(() => {
     fetchTodos();
